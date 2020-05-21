@@ -1,0 +1,8 @@
+import "tfrun"
+import "decimal"
+
+delta = decimal.new(tfrun.cost_estimate.delta_monthly_cost)
+
+main = rule {
+    delta < 100
+}
