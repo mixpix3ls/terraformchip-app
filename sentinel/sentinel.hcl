@@ -1,3 +1,4 @@
-policy "tags_enforced" {
-  enforcement_level = "soft-mandatory"
+
+policy "az_enforced" {
+  enforcement_level = "hard-mandatory"
 }
