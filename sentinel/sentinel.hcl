@@ -1,8 +1,8 @@
 
-policy "az.sentinel" {
+policy "az" {
   enforcement_level = "hard-mandatory"
 }
 
-policy "cost.sentinel" {
+policy "cost" {
   enforcement_level = "soft-mandatory"
 }
