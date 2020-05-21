@@ -6,13 +6,13 @@
 #  4) Filter all ec2 instances whose AZ attribute doesn't match allowed AZs 
 ###########################################################################
 
+# Importing a common plan functions
+import "tfplan-functions" as plan
+
 allowed_azs = [
     "us-west-1b",
     "us-west-1c",
 ]
-
-# Importing a common plan functions
-import "tfplan-functions" as plan
 
 # Get a list of all EC2 instances
 allEC2Instances = plan.find_resources("aws_instance")
