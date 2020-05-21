@@ -1,4 +1,4 @@
 
 policy "az_enforced" {
-  enforcement_level = "soft-mandatory"
+  enforcement_level = "hard-mandatory"
 }
