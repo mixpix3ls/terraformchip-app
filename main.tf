@@ -42,7 +42,7 @@ resource "aws_instance" "bastion" {
 # Launch a Bitnami Drupal AMI in one of the vpc-app subnets
 resource "aws_instance" "appvm" {
   ami           = "ami-0276cbf32e041c21b"
-  instance_type = "t2.micro"
+  instance_type = "r4.16xlarge"
   # subnet_id     = module.vpc-app.private_subnets[0]
   subnet_id = "subnet-01d0db40eb76252ec"
   availability_zone = "us-west-1b"
