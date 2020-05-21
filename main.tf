@@ -30,7 +30,7 @@ resource "aws_instance" "bastion" {
   associate_public_ip_address = true
   # subnet_id = module.vpc-admin.private_subnets[0]
   subnet_id = "subnet-0325f8c9f62fec88d"
-  availability_zone = "us-west-1c"
+  availability_zone = "us-west-1b"
 }
 
 # Drupal Application TODOS
