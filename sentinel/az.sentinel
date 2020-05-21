@@ -14,10 +14,13 @@ aws_instances = func() {
     return instances
 }
 
+# TODO: Also need to restrict databases to AZs in us-west-1 and eu-central-1
 
 allowed_zones = [
   "us-west-1b",
   "us-west-1c",
+  "eu-central-1a",
+  "eu-central-1b",
 ]
 # Rule to restrict availability zones and region
 main = rule {
