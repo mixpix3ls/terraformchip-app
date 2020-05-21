@@ -17,7 +17,7 @@ aws_instances = func() {
 
 allowed_zones = [
   "us-west-1b",
-  "us-east-1c",
+  "us-west-1c",
 ]
 # Rule to restrict availability zones and region
 main = rule {
