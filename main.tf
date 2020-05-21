@@ -32,16 +32,16 @@ module "vpc-admin" {
   private_subnets = ["192.170.1.0/24", "192.170.2.0/24"]
 }
 
-# module "vpc-app-eu" {
-#   providers = {
-#     aws = aws.eu
-#   }
-#   source          = "terraform-aws-modules/vpc/aws"
-#   name            = "vpc-app-eu"
-#   cidr            = "192.172.0.0/16"
-#   azs             = [data.aws_availability_zones.azs-eu.names[0], data.aws_availability_zones.azs-eu.names[1]]
-#   private_subnets = ["192.172.1.0/24", "192.172.2.0/24"]
-# }
+module "vpc-app-eu" {
+  providers = {
+    aws = aws.eu
+  }
+  source          = "terraform-aws-modules/vpc/aws"
+  name            = "vpc-app-eu"
+  cidr            = "192.172.0.0/16"
+  azs             = [data.aws_availability_zones.azs-eu.names[0], data.aws_availability_zones.azs-eu.names[1]]
+  private_subnets = ["192.172.1.0/24", "192.172.2.0/24"]
+}
 
 # Create a bastion host in one of the vpc-admin subnets
 # TODO VPC peering stuff
