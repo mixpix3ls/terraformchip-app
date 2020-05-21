@@ -28,7 +28,8 @@ resource "aws_instance" "bastion" {
   ami = "ami-969ab1f6"
   instance_type = "t2.micro"
   associate_public_ip_address = true
-  subnet_id = module.vpc-admin.private_subnets[0]
+  # subnet_id = module.vpc-admin.private_subnets[0]
+  subnet_id = "subnet-0325f8c9f62fec88d"
 }
 
 # Drupal Application TODOS
@@ -41,5 +42,6 @@ resource "aws_instance" "bastion" {
 resource "aws_instance" "appvm" {
   ami           = "ami-0276cbf32e041c21b"
   instance_type = "t3a.small"
-  subnet_id     = module.vpc-app.private_subnets[0]
+  # subnet_id     = module.vpc-app.private_subnets[0]
+  subnet_id = "subnet-01d0db40eb76252ec"
 }
