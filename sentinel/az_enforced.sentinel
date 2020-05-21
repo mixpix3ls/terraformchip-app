@@ -1,23 +1,29 @@
-###########################################################################
-#  Credit: https://github.com/hashicorp/terraform-guides/blob/master/governance/third-generation/aws/restrict-availability-zones.sentinel
-#  1) Define all the allowed AZs
-#  2) Inspect terraform plan output
-#  3) Get all ec2 instances from the plan
-#  4) Filter all ec2 instances whose AZ attribute doesn't match allowed AZs 
-###########################################################################
+# Credit: https://www.hashicorp.com/blog/tfe-and-sentinel-sentinel-policy-data-sovereignty/
 
-# Importing a common plan functions
-import "tfplan-functions" as plan
+# NOTE that you must explicitly specify availability_zone on all aws_instances 
 
-allowed_azs = [
-    "us-west-1b",
-    "us-west-1c",
+# Base everything off plan
+import "tfplan"
+
+# Get all AWS instances from all modules
+aws_instances = func() {
+    instances = []
+    for tfplan.module_paths as path {
+        instances += values(tfplan.module(path).resources.aws_instance) else []
+    }
+    return instances
+}
+
+
+allowed_zones = [
+  "us-west-1b",
+  "us-east-1c"
 ]
-
-# Get a list of all EC2 instances
-allEC2Instances = plan.find_resources("aws_instance")
-
-# Filter out all non-compliant EC2 instances
-allNonCompliantEC2Instances = plan.filter_attribute_not_in_list(allEC2Instances, "availability_zone", allowed_azs, true)
-
-main = rule {length(allNonCompliantEC2Instances["messages"]) == 0}
+# Rule to restrict availability zones and region
+main = rule {
+    all aws_instances() as _, instances {
+      all instances as index, r {
+         r.applied.availability_zone in allowed_zones
+      }
+    }
+}
